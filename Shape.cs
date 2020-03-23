@@ -39,17 +39,17 @@ namespace TUTRYS
 
         public void MoveRight()
         {                    
-            if (x <= 8 - sizematrix)
+           
                 
                 x++;                                                                                     
         }
 
         public void MoveLeft()
         {
-            if (x >= 0)
-            {
+            
+            
                 x--;
-            }          
+                      
                     
         }
 
