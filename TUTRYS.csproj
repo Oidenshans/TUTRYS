@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RandomFigure.cs" />
     <Compile Include="GameLogicFunction.cs" />
     <Compile Include="Shape.cs" />
     <Compile Include="MapFunction.cs" />

@@ -11,131 +11,166 @@ using System.Timers;
 using System.Threading;
 
 namespace TUTRYS
+
 {
+    
     public partial class Form1 : Form
     {
+       
+        MapFunction Draw;
 
-        Shape currentShape;
-        MapFunction Grid1;
         GameLogicFunction Logic;
 
-        int size;
-        int[,] map = new int[16, 8];
+        
+       
+        const int size = 25;
+        const int width = 8;
+        const int height = 16;
 
+        int[,] map = new int[height, width];
+             
         public Form1()
         {
 
             InitializeComponent();
-            this.KeyUp += new KeyEventHandler(Keyfunc);
+           
             Init();
+
         }
 
         public void Init()
         {
-            size = 25;
+            
+            Draw = new MapFunction(size, map);
 
+            RandomizeFigure();
 
-            Grid1 = new MapFunction(size, map);
-            currentShape = new Shape(3, 0);
-            Logic = new GameLogicFunction(currentShape, map);
-            //this.KeyUp += new KeyEventHandler(Keyfunc);
-            timer1.Stop();
             timer1.Interval = 1000;
-            timer1.Tick += new EventHandler(update);
+
+            timer1.Tick += new EventHandler(Update);
+
             timer1.Start();
+
             Invalidate();
         }
 
-        private void Keyfunc(object sender, KeyEventArgs e)
+             
+        private void Update(object sender, EventArgs e)
         {
+
+            Logic.DownDrive();
+
+            //  timer1.Tick -= new EventHandler(Update);
+
+            //Init();
+
+            //Logic.CutLine();
+
+            Invalidate();
+
+        }
+
+        private void Form1KeyDown(object sender, KeyEventArgs e)
+        {
+
             switch (e.KeyCode)
             {
                 case Keys.A:
-                    Logic.ResetArea();
-                    if (Logic.CheckWall(-1) == 0)
-                    {
-                        currentShape.MoveLeft();
-                    }
-                    Logic.Merge();
+
+                    // Движение фигуры влево
+                    Logic.LeftDrive();
+
                     Invalidate();
+
                     break;
+
                 case Keys.D:
-                    Logic.ResetArea();
 
-                    if (Logic.CheckWall(1) == 0)
-                    {
-                        currentShape.MoveRight();
-                    }
+                    // Движение фигуры вправо
+                    Logic.RightDrive();
 
-                    Logic.Merge();
                     Invalidate();
+
                     break;
+
 
                 case Keys.S:
+
+                    // Увеличение скорости падения фигуры
                     if (timer1.Interval > 10)
                     {
                         timer1.Interval -= timer1.Interval - timer1.Interval / 2;
                     }
 
-                    Logic.ResetArea();
-
-                    if (Logic.CheckWall() == 0)
-                    {
-                        currentShape.MoveDown();
-                    }
-
-                    Logic.Merge();
-                    Invalidate();
                     break;
 
 
                 case Keys.W:
-                    Logic.ResetArea();
-                    currentShape.TurnArround();
-                    Logic.Merge();
+
+                    // Переворот фигуры
+                    Logic.TurnArrounDrive();
+
                     Invalidate();
+
                     break;
             }
-        }
 
-        private void update(object sender, EventArgs e)
-        {
-
-            Logic.ResetArea();
-
-            if (Logic.CheckWall() == 0)
-            {
-                currentShape.MoveDown();
-                Logic.Merge();
-            }
-            else
-            {
-                Logic.ChangeColor();
-            }
-
-
-
-
-
-            Invalidate();
         }
 
 
         private void OnPaint(object sender, PaintEventArgs e)
         {
 
+            Draw.DrawGrid(e.Graphics);
 
-            Grid1.DrawGrid(e.Graphics);
-            Grid1.DrawMap(e.Graphics);
-
-
+            Draw.DrawMap(e.Graphics);
 
         }
-
-        private void button1_Click(object sender, EventArgs e)
+       
+        private void RandomizeFigure()
         {
+            Random rnd = new Random();
 
+            int FigureType = rnd.Next(0, 3);
+
+            switch (FigureType)
+            {
+                case 0:
+
+                    ShapeLine currentShape0 = new ShapeLine(3, 0);
+
+                    Logic = new GameLogicFunction(currentShape0, map);
+
+                    break;
+
+                case 1:
+                    
+                    ShapeZigZag currentShape1 = new ShapeZigZag(3, 0);
+
+                    Logic = new GameLogicFunction(currentShape1, map);
+
+                    break;
+
+                case 2:
+
+                    ShapeRectangle currentShape2 = new ShapeRectangle(3, 0);
+
+                    Logic = new GameLogicFunction(currentShape2, map);
+
+                    break;
+
+                case 3:
+
+                    ShapeLtype currentShape3 = new ShapeLtype(3, 0);
+
+                    Logic = new GameLogicFunction(currentShape3, map);
+
+                    break;
+
+            }
         }
+
+
     }
      
     

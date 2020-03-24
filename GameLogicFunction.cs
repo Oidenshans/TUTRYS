@@ -8,20 +8,49 @@ namespace TUTRYS
 {
     class GameLogicFunction
     {
-        private Shape currentShape1;
-        private int[,] map;
-       public GameLogicFunction(Shape _currentShape, int[,] _map) { currentShape1 = _currentShape; map = _map; }
+       private Shape currentShape;
+       private int[,] map;
+       private int count;
+
+        // Конструкторы для различных фигур
+       public GameLogicFunction(ShapeLine _currentShape, int[,] _map) 
+        { 
+            currentShape = _currentShape; 
+            map = _map; 
+        
+        }
+
+        public GameLogicFunction(ShapeZigZag _currentShape, int[,] _map)
+        {
+            currentShape = _currentShape;
+            map = _map;
+
+        }
+
+        public GameLogicFunction(ShapeRectangle _currentShape, int[,] _map)
+        {
+            currentShape = _currentShape;
+            map = _map;
+
+        }
+
+        public GameLogicFunction(ShapeLtype _currentShape, int[,] _map)
+        {
+            currentShape = _currentShape;
+            map = _map;
+
+        }
 
 
         public void Merge()
         {
-            for (int i = currentShape1.y; i < currentShape1.y + currentShape1.sizematrix; i++)
+            for (int i = currentShape.y; i < currentShape.y + currentShape.sizematrix; i++)
             {
-                for (int j = currentShape1.x; j < currentShape1.x + currentShape1.sizematrix; j++)
+                for (int j = currentShape.x; j < currentShape.x + currentShape.sizematrix; j++)
                 {
-                    if (currentShape1.matrix[i - currentShape1.y, j - currentShape1.x] != 0)
+                    if (currentShape.matrix[i - currentShape.y, j - currentShape.x] != 0)
                     {
-                        map[i, j] = currentShape1.matrix[i - currentShape1.y, j - currentShape1.x];
+                        map[i, j] = currentShape.matrix[i - currentShape.y, j - currentShape.x];
                     }
 
                 }
@@ -30,13 +59,13 @@ namespace TUTRYS
 
         public void ResetArea()
         {
-            for (int i = currentShape1.y; i < currentShape1.y + currentShape1.sizematrix; i++)
+            for (int i = currentShape.y; i < currentShape.y + currentShape.sizematrix; i++)
             {
-                for (int j = currentShape1.x; j < currentShape1.x + currentShape1.sizematrix; j++)
+                for (int j = currentShape.x; j < currentShape.x + currentShape.sizematrix; j++)
                 {
                     if (i >= 0 && j >= 0 && i < 16 && j < 8)
                     {
-                        if (currentShape1.matrix[i - currentShape1.y, j - currentShape1.x] != 0)
+                        if (currentShape.matrix[i - currentShape.y, j - currentShape.x] != 0)
                         {
                             map[i, j] = 0;
                         }
@@ -52,11 +81,11 @@ namespace TUTRYS
 
         public int CheckWall()
         {
-            for (int i = currentShape1.y; i < currentShape1.y + currentShape1.sizematrix; i++)
+            for (int i = currentShape.y; i < currentShape.y + currentShape.sizematrix; i++)
             {
-                for (int j = currentShape1.x; j < currentShape1.x + currentShape1.sizematrix; j++)
+                for (int j = currentShape.x; j < currentShape.x + currentShape.sizematrix; j++)
                 {
-                    if (currentShape1.matrix[i - currentShape1.y, j - currentShape1.x] != 0)
+                    if (currentShape.matrix[i - currentShape.y, j - currentShape.x] != 0)
                     {
                         if (i + 1 == 16)
                         {
@@ -79,23 +108,31 @@ namespace TUTRYS
 
         public int CheckWall(int d)
         {
-            for (int i = currentShape1.y; i < currentShape1.y + currentShape1.sizematrix; i++)
+            for (int i = currentShape.y; i < currentShape.y + currentShape.sizematrix; i++)
             {
-                for (int j = currentShape1.x; j < currentShape1.x + currentShape1.sizematrix; j++)
+                for (int j = currentShape.x; j < currentShape.x + currentShape.sizematrix; j++)
                 {
-                    if (currentShape1.matrix[i - currentShape1.y, j - currentShape1.x] != 0)
+                    if (currentShape.matrix[i - currentShape.y, j - currentShape.x] != 0)
                     {
                         
-                        if (j + 1*d == 8||j+1*d<0 )
+                        if (j + 1*d >7 || j+1*d<0 )
                         {
                             return 1;
                         }
 
-                        if (map[i, j + 1*d] != 0|| map[i, j + 1 * d]!=0)
+                        if (map[i, j + 1*d] != 0)
                         {
-                            return 1;
+                            if (j - currentShape.x + 1 * d >= currentShape.sizematrix || j - currentShape.x + 1 * d < 0)
+                            {
+                                return 1;
+                            }
+                            if (currentShape.matrix[i - currentShape.y, j - currentShape.x + 1 * d] == 0)
+
+                                return 1;
                         }
-                                            
+                         
+                        
+
                     }
                 }
             }
@@ -106,11 +143,11 @@ namespace TUTRYS
 
         public void ChangeColor()
         {
-            for (int i = currentShape1.y; i < currentShape1.y + currentShape1.sizematrix; i++)
+            for (int i = currentShape.y; i < currentShape.y + currentShape.sizematrix; i++)
             {
-                for (int j = currentShape1.x; j < currentShape1.x + currentShape1.sizematrix; j++)
+                for (int j = currentShape.x; j < currentShape.x + currentShape.sizematrix; j++)
                 {
-                    if (currentShape1.matrix[i - currentShape1.y, j - currentShape1.x] != 0)
+                    if (currentShape.matrix[i - currentShape.y, j - currentShape.x] == 1)
                     {
                         map[i, j] = 2;
                     }
@@ -121,6 +158,102 @@ namespace TUTRYS
 
 
         }
+
+
+        public void CutLine()
+        {
+            for (int i = 0; i < 16; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    if (map[i, j] == 2)
+                    {
+                        count += 1;
+                    }
+                                   
+                }
+
+                if (count == 8)
+                {
+                    for (int j = 0; j < 8; j++)
+                    {
+
+                        map[i, j] = 0;
+                                                  
+                       
+                    }
+                }
+
+
+            }
+        }
+
+
+        public void LeftDrive()
+        {
+            ResetArea();
+
+            if (CheckWall(-1) == 0)
+            {
+
+                currentShape.MoveLeft();
+
+                Merge();
+                
+            }
+        }
+
+        public void RightDrive()
+        {
+            ResetArea();
+
+            if (CheckWall(1) == 0)
+            {
+
+                currentShape.MoveRight();
+
+                Merge();
+
+            }
+        }
+
+        public void TurnArrounDrive()
+        {
+            ResetArea();
+
+            currentShape.TurnArround();
+
+            Merge();
+        }
+
+        public void DownDrive()
+        {
+            ResetArea();
+
+            if (CheckWall() == 0)
+            {
+
+                currentShape.MoveDown();
+
+                Merge();
+
+            }
+
+            else
+            {
+
+                Merge();
+
+                ChangeColor();
+
+
+            
+            }
+        }
+
+
+
+
 
     }
 }

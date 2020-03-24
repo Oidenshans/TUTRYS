@@ -47,7 +47,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.OnPaint);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Keyfunc);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1KeyDown);
             this.ResumeLayout(false);
 
         }

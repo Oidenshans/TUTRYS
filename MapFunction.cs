@@ -11,10 +11,11 @@ namespace TUTRYS
         private int size;
         private int[,] map;
 
-        public MapFunction(int _size,int [,] _map) { size = _size; map = _map;  }
-
-
-
+        public MapFunction(int _size,int [,] _map)
+        { 
+            size = _size; 
+            map = _map;  
+        }
 
 
         public void DrawGrid(Graphics e)
