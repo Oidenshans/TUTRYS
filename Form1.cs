@@ -14,34 +14,28 @@ namespace TUTRYS
 {
     public partial class Form1 : Form
     {
-
-        Shape currentShape;
-        MapFunction Grid1;
-        GameLogicFunction Logic;
-
-        int size;
-        int[,] map = new int[16, 8];
+        private const int GridSize = 25;
+        private MapFunction Grid { get; set; }
+        private Shape CurrentShape { get; set; }
+        private GameLogicFunction Logic { get; set; }
+        private int[,] Map { get; } = new int[16, 8];
 
         public Form1()
         {
-
             InitializeComponent();
-            this.KeyUp += new KeyEventHandler(Keyfunc);
             Init();
         }
 
         public void Init()
         {
-            size = 25;
+            Grid = new MapFunction(GridSize, Map);
+            CurrentShape = new LShape(3, 0);
+            Logic = new GameLogicFunction(CurrentShape, Map);
 
-
-            Grid1 = new MapFunction(size, map);
-            currentShape = new Shape(3, 0);
-            Logic = new GameLogicFunction(currentShape, map);
-            //this.KeyUp += new KeyEventHandler(Keyfunc);
+            this.KeyUp += new KeyEventHandler(Keyfunc);
             timer1.Stop();
             timer1.Interval = 1000;
-            timer1.Tick += new EventHandler(update);
+            timer1.Tick += new EventHandler(Update);
             timer1.Start();
             Invalidate();
         }
@@ -54,17 +48,18 @@ namespace TUTRYS
                     Logic.ResetArea();
                     if (Logic.CheckWall(-1) == 0)
                     {
-                        currentShape.MoveLeft();
+                        CurrentShape.MoveLeft();
                     }
+
                     Logic.Merge();
                     Invalidate();
                     break;
+
                 case Keys.D:
                     Logic.ResetArea();
-
                     if (Logic.CheckWall(1) == 0)
                     {
-                        currentShape.MoveRight();
+                        CurrentShape.MoveRight();
                     }
 
                     Logic.Merge();
@@ -78,34 +73,31 @@ namespace TUTRYS
                     }
 
                     Logic.ResetArea();
-
                     if (Logic.CheckWall() == 0)
                     {
-                        currentShape.MoveDown();
+                        CurrentShape.MoveDown();
                     }
 
                     Logic.Merge();
                     Invalidate();
                     break;
 
-
                 case Keys.W:
                     Logic.ResetArea();
-                    currentShape.TurnArround();
+                    CurrentShape.TurnArround();
                     Logic.Merge();
                     Invalidate();
                     break;
             }
         }
 
-        private void update(object sender, EventArgs e)
+        private void Update(object sender, EventArgs e)
         {
-
             Logic.ResetArea();
 
             if (Logic.CheckWall() == 0)
             {
-                currentShape.MoveDown();
+                CurrentShape.MoveDown();
                 Logic.Merge();
             }
             else
@@ -113,30 +105,14 @@ namespace TUTRYS
                 Logic.ChangeColor();
             }
 
-
-
-
-
             Invalidate();
         }
 
 
         private void OnPaint(object sender, PaintEventArgs e)
         {
-
-
-            Grid1.DrawGrid(e.Graphics);
-            Grid1.DrawMap(e.Graphics);
-
-
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
+            Grid.DrawGrid(e.Graphics);
+            Grid.DrawMap(e.Graphics);
         }
     }
-     
-    
 }

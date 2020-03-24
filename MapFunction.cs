@@ -4,56 +4,47 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+
 namespace TUTRYS
 {
     class MapFunction
     {
-        private int size;
-        private int[,] map;
+        private int Size { get; set; }
+        private int[,] Map { get; set; }
 
-        public MapFunction(int _size,int [,] _map) { size = _size; map = _map;  }
-
-
-
-
+        public MapFunction(int _size, int[,] _map) {
+            Size = _size;
+            Map = _map;
+        }
 
         public void DrawGrid(Graphics e)
         {
-            for (int i = 0; i <= 16; i++)
+            for (int y = 0; y <= 16; y++)
             {
-
-                e.DrawLine(Pens.Black, new Point(50, 50 + i * size), new Point(50 + 8 * size, 50 + i * size));
-
+                e.DrawLine(Pens.Black, new Point(50, 50 + y * Size), new Point(50 + 8 * Size, 50 + y * Size));
             }
-            for (int i = 0; i <= 8; i++)
+            for (int x = 0; x <= 8; x++)
             {
-
-                e.DrawLine(Pens.Black, new Point(50 + i * size, 50), new Point(50 + i * size, 50 + 16 * size));
-
+                e.DrawLine(Pens.Black, new Point(50 + x * Size, 50), new Point(50 + x * Size, 50 + 16 * Size));
             }
         }
 
-
-
         public void DrawMap(Graphics e)
         {
-            for (int i = 0; i < 16; i++)
+            for (int y = 0; y < 16; y++)
             {
-                for (int j = 0; j < 8; j++)
+                for (int x = 0; x < 8; x++)
                 {
-                    if (map[i, j] == 1)
+                    if (Map[y, x] == 1)
                     {
-                        e.FillRectangle(Brushes.Red, new Rectangle(50 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
+                        e.FillRectangle(Brushes.Red, new Rectangle(50 + x * (Size) + 1, 50 + y * (Size) + 1, Size - 1, Size - 1));
                     }
-                    if (map[i, j] == 2)
+                    if (Map[y, x] == 2)
                     {
-                        e.FillRectangle(Brushes.Green, new Rectangle(50 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
+                        e.FillRectangle(Brushes.Green, new Rectangle(50 + x * (Size) + 1, 50 + y * (Size) + 1, Size - 1, Size - 1));
                     }
                 }
             }
         }
-
-
-
     }
 }

@@ -8,20 +8,24 @@ namespace TUTRYS
 {
     class GameLogicFunction
     {
-        private Shape currentShape1;
-        private int[,] map;
-       public GameLogicFunction(Shape _currentShape, int[,] _map) { currentShape1 = _currentShape; map = _map; }
+        private Shape CurrentShape { get; }
+        private int[,] Map { get; }
+        public GameLogicFunction(Shape _currentShape, int[,] _map)
+        {
+            CurrentShape = _currentShape;
+            Map = _map;
+        }
 
 
         public void Merge()
         {
-            for (int i = currentShape1.y; i < currentShape1.y + currentShape1.sizematrix; i++)
+            for (int y = CurrentShape.Y; y < CurrentShape.Y + Shape.SizeMatrix; y++)
             {
-                for (int j = currentShape1.x; j < currentShape1.x + currentShape1.sizematrix; j++)
+                for (int x = CurrentShape.X; x < CurrentShape.X + Shape.SizeMatrix; x++)
                 {
-                    if (currentShape1.matrix[i - currentShape1.y, j - currentShape1.x] != 0)
+                    if (CurrentShape.Matrix[y - CurrentShape.Y, x - CurrentShape.X] != 0)
                     {
-                        map[i, j] = currentShape1.matrix[i - currentShape1.y, j - currentShape1.x];
+                        Map[y, x] = CurrentShape.Matrix[y - CurrentShape.Y, x - CurrentShape.X];
                     }
 
                 }
@@ -30,97 +34,76 @@ namespace TUTRYS
 
         public void ResetArea()
         {
-            for (int i = currentShape1.y; i < currentShape1.y + currentShape1.sizematrix; i++)
+            for (int y = CurrentShape.Y; y < CurrentShape.Y + Shape.SizeMatrix; y++)
             {
-                for (int j = currentShape1.x; j < currentShape1.x + currentShape1.sizematrix; j++)
+                for (int x = CurrentShape.X; x < CurrentShape.X + Shape.SizeMatrix; x++)
                 {
-                    if (i >= 0 && j >= 0 && i < 16 && j < 8)
+                    if (y >= 0 && x >= 0 && y < 16 && x < 8)
                     {
-                        if (currentShape1.matrix[i - currentShape1.y, j - currentShape1.x] != 0)
+                        if (CurrentShape.Matrix[y - CurrentShape.Y, x - CurrentShape.X] != 0)
                         {
-                            map[i, j] = 0;
+                            Map[y, x] = 0;
                         }
-
-
                     }
                 }
-
-
             }
         }
-
 
         public int CheckWall()
         {
-            for (int i = currentShape1.y; i < currentShape1.y + currentShape1.sizematrix; i++)
+            for (int y = CurrentShape.Y; y < CurrentShape.Y + Shape.SizeMatrix; y++)
             {
-                for (int j = currentShape1.x; j < currentShape1.x + currentShape1.sizematrix; j++)
+                for (int x = CurrentShape.X; x < CurrentShape.X + Shape.SizeMatrix; x++)
                 {
-                    if (currentShape1.matrix[i - currentShape1.y, j - currentShape1.x] != 0)
+                    if (CurrentShape.Matrix[y - CurrentShape.Y, x - CurrentShape.X] != 0)
                     {
-                        if (i + 1 == 16)
+                        if (y + 1 == 16 || Map[y + 1, x] != 0)
                         {
                             return 1;
                         }
-                        if (map[i + 1, j] != 0)
-                        {
-                            return 1;
-                        }
-                       
                     }
                 }
             }
 
             return 0;
-
         }
-
-
 
         public int CheckWall(int d)
         {
-            for (int i = currentShape1.y; i < currentShape1.y + currentShape1.sizematrix; i++)
+            for (int y = CurrentShape.Y; y < CurrentShape.Y + Shape.SizeMatrix; y++)
             {
-                for (int j = currentShape1.x; j < currentShape1.x + currentShape1.sizematrix; j++)
+                for (int x = CurrentShape.X; x < CurrentShape.X + Shape.SizeMatrix; x++)
                 {
-                    if (currentShape1.matrix[i - currentShape1.y, j - currentShape1.x] != 0)
+                    if (CurrentShape.Matrix[y - CurrentShape.Y, x - CurrentShape.X] != 0)
                     {
-                        
-                        if (j + 1*d == 8||j+1*d<0 )
+
+                        if (x + 1 * d == 8 || x + 1 * d < 0)
                         {
                             return 1;
                         }
 
-                        if (map[i, j + 1*d] != 0|| map[i, j + 1 * d]!=0)
+                        if (Map[y, x + 1 * d] != 0 || Map[y, x + 1 * d] != 0)
                         {
                             return 1;
                         }
-                                            
                     }
                 }
             }
-
             return 0;
-
         }
 
         public void ChangeColor()
         {
-            for (int i = currentShape1.y; i < currentShape1.y + currentShape1.sizematrix; i++)
+            for (int y = CurrentShape.Y; y < CurrentShape.Y + Shape.SizeMatrix; y++)
             {
-                for (int j = currentShape1.x; j < currentShape1.x + currentShape1.sizematrix; j++)
+                for (int x = CurrentShape.X; x < CurrentShape.X + Shape.SizeMatrix; x++)
                 {
-                    if (currentShape1.matrix[i - currentShape1.y, j - currentShape1.x] != 0)
+                    if (CurrentShape.Matrix[y - CurrentShape.Y, x - CurrentShape.X] != 0)
                     {
-                        map[i, j] = 2;
+                        Map[y, x] = 2;
                     }
                 }
-
-
             }
-
-
         }
-
     }
 }

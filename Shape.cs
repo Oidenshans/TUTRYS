@@ -6,72 +6,49 @@ using System.Threading.Tasks;
 
 namespace TUTRYS
 {
-   public class Shape
+    public abstract class Shape
     {
 
-        public int x;
-        public int y;
-        public int[,] matrix;
-        private int copy;
-        public  int sizematrix;
+        public const int SizeMatrix = 3;
+        public int X { get; set; }
+        public int Y { get; set; }
+        public int[,] Matrix { get; set;  }
 
-        public Shape(int _x,int _y) 
+        public Shape(int _x, int _y)
         {
-            x = _x;
-            y = _y;
-            matrix = new int[3, 3] 
-            { 
-                { 0, 1, 0 },
-                { 0, 1, 0 }, 
-                { 0, 1, 1 }, 
-            };
-
-            sizematrix = 3;
+            X = _x;
+            Y = _y;
         }
 
         public void MoveDown()
         {
-           
-                y++;
-            
+            Y++;
         }
 
-
         public void MoveRight()
-        {                    
-           
-                
-                x++;                                                                                     
+        {
+            X++;
         }
 
         public void MoveLeft()
         {
-            
-            
-                x--;
-                      
-                    
+            X--;
         }
-
-
-
 
         public void TurnArround()
         {
-            if (x>=0 && x<= 8 - sizematrix && y<= 15 - sizematrix)
+            if (X >= 0 && X <= 8 - SizeMatrix && Y <= 15 - SizeMatrix)
             {
-                for (int i = 0; i < 3; i++)
+                for (int x = 0; x < 3; x++)
                 {
-                    for (int j = 0; j < i; j++)
+                    for (int y = 0; y < x; y++)
                     {
-                        copy = matrix[i, j];
-                        matrix[i, j] = matrix[j, i];
-                        matrix[j, i] = copy;
+                        int copy = Matrix[x, y];
+                        Matrix[x, y] = Matrix[y, x];
+                        Matrix[y, x] = copy;
                     }
                 }
             }
-            
         }
-
     }
 }
