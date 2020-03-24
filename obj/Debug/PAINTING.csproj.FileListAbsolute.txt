@@ -1,9 +1,0 @@
-E:\VS_project\PAINTING\bin\Debug\PAINTING.exe.config
-E:\VS_project\PAINTING\bin\Debug\PAINTING.exe
-E:\VS_project\PAINTING\bin\Debug\PAINTING.pdb
-E:\VS_project\PAINTING\obj\Debug\PAINTING.csprojAssemblyReference.cache
-E:\VS_project\PAINTING\obj\Debug\PAINTING.Form1.resources
-E:\VS_project\PAINTING\obj\Debug\PAINTING.Properties.Resources.resources
-E:\VS_project\PAINTING\obj\Debug\PAINTING.csproj.GenerateResource.cache
-E:\VS_project\PAINTING\obj\Debug\PAINTING.exe
-E:\VS_project\PAINTING\obj\Debug\PAINTING.pdb
