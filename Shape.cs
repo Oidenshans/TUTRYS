@@ -9,18 +9,19 @@ namespace TUTRYS
    public abstract class Shape
     {
 
-        public int x;
-        public int y;
+
+        public int X { get; set; }
+        public int Y { get; set; }
         public int[,] matrix;
         private int copy;
-        public  int sizematrix=3;
+        public  int sizeMatrix=3;
 
 
 
         public Shape(int _x, int _y)
         {
-            x = _x;
-            y = _y;
+            X = _x;
+            Y = _y;
            
         }
                  
@@ -28,28 +29,28 @@ namespace TUTRYS
         public void MoveDown()  // Изменение координаты у при движении вниз
         {
            
-             y++;
+             Y++;
             
         }
 
         public void MoveRight() // Изменение координаты x при движении вправо
         {                    
                    
-             x++; 
+             X++; 
             
         }
 
         public void MoveLeft()  // Изменение координаты x при движении влево
         {
                       
-             x--;                  
+             X--;                  
                     
         }
 
 
         public void TurnArround() // Переворачивание фигуры
         {
-            if (x>=0 && x<= 8 - sizematrix && y<= 15 - sizematrix)
+            if (X>=0 && X<= 8 - sizeMatrix && Y<= 15 - sizeMatrix)
             {
                 for (int i = 0; i < 3; i++)
                 {
@@ -73,8 +74,8 @@ namespace TUTRYS
         public ShapeLine(int _x, int _y)  // Создание фигуры в виде Линии
             : base(_x, _y)
         {
-            x = _x;
-            y = _y;
+            X = _x;
+            Y = _y;
             matrix = new int[3, 3]
             {
                 { 0, 0, 0 },
@@ -95,8 +96,8 @@ namespace TUTRYS
         public ShapeZigZag(int _x, int _y) // Создание фигуры в виде Зигзага
             : base(_x, _y)
         {
-            x = _x;
-            y = _y;
+            X = _x;
+            Y = _y;
             matrix = new int[3, 3]
             {
                 { 0, 1, 0 },
@@ -115,8 +116,8 @@ namespace TUTRYS
         public ShapeRectangle(int _x, int _y)
             : base(_x, _y)
         {
-            x = _x;
-            y = _y;
+            X = _x;
+            Y = _y;
             matrix = new int[3, 3]
             {
                 { 0, 1, 1 },
@@ -137,8 +138,8 @@ namespace TUTRYS
         public ShapeLtype(int _x, int _y)
             : base(_x, _y)
         {
-            x = _x;
-            y = _y;
+            X = _x;
+            Y = _y;
             matrix = new int[3, 3]
             {
                 { 0, 1, 0 },

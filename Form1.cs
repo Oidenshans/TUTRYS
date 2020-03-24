@@ -13,37 +13,34 @@ using System.Threading;
 namespace TUTRYS
 
 {
-    
+
     public partial class Form1 : Form
     {
-       
+
         MapFunction Draw;
 
-        GameLogicFunction Logic;
+        GameLogicFunction Logic { get; set; }
 
-        
-       
         const int size = 25;
         const int width = 8;
         const int height = 16;
 
         int[,] map = new int[height, width];
-             
+
         public Form1()
         {
-
             InitializeComponent();
-           
             Init();
-
         }
 
         public void Init()
         {
-            
-            Draw = new MapFunction(size, map);
 
-            RandomizeFigure();
+
+            Shape currentShape = RandomFigure.GetRandomFigure();
+
+            Draw = new MapFunction(size, map);
+            Logic = new GameLogicFunction(currentShape, map);
 
             timer1.Interval = 1000;
 
@@ -54,7 +51,7 @@ namespace TUTRYS
             Invalidate();
         }
 
-             
+
         private void Update(object sender, EventArgs e)
         {
 
@@ -126,52 +123,10 @@ namespace TUTRYS
             Draw.DrawMap(e.Graphics);
 
         }
-       
-        private void RandomizeFigure()
-        {
-            Random rnd = new Random();
 
-            int FigureType = rnd.Next(0, 3);
-
-            switch (FigureType)
-            {
-                case 0:
-
-                    ShapeLine currentShape0 = new ShapeLine(3, 0);
-
-                    Logic = new GameLogicFunction(currentShape0, map);
-
-                    break;
-
-                case 1:
-                    
-                    ShapeZigZag currentShape1 = new ShapeZigZag(3, 0);
-
-                    Logic = new GameLogicFunction(currentShape1, map);
-
-                    break;
-
-                case 2:
-
-                    ShapeRectangle currentShape2 = new ShapeRectangle(3, 0);
-
-                    Logic = new GameLogicFunction(currentShape2, map);
-
-                    break;
-
-                case 3:
-
-                    ShapeLtype currentShape3 = new ShapeLtype(3, 0);
-
-                    Logic = new GameLogicFunction(currentShape3, map);
-
-                    break;
-
-            }
-        }
 
 
     }
-     
-    
+
+
 }

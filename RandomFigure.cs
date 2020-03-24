@@ -4,51 +4,40 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-/*namespace TUTRYS
+namespace TUTRYS
 {
     class RandomFigure
     {
-
-       
-        public void RandomizeFigure()
+        public static Shape GetRandomFigure()
         {
             Random rnd = new Random();
+            int FigureType = rnd.Next(0, 3);
+            Shape currentShape = null;
 
-            switch (rnd.Next(0, 3))
-
+            switch (FigureType)
             {
                 case 0:
-
-                    ShapeLine currentShape0 = new ShapeLine(3, 0);
-
+                    currentShape = new ShapeLine(3, 0);
                     break;
-                   
 
                 case 1:
-
-                    ShapeZigZag currentShape1 = new ShapeZigZag(3, 0);
-
+                    currentShape = new ShapeZigZag(3, 0);
                     break;
 
                 case 2:
-
-                    ShapeRectangle currentShape2 = new ShapeRectangle(3, 0);
-
+                    currentShape = new ShapeRectangle(3, 0);
                     break;
 
                 case 3:
-
-                    ShapeLtype currentShape3 = new ShapeLtype(3, 0);
-
+                    currentShape = new ShapeLtype(3, 0);
                     break;
 
             }
-
-        }    
-
+            return currentShape;
+        }
     }
 
 
 
 }
-*/
+
