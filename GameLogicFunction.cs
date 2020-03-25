@@ -21,7 +21,7 @@ namespace TUTRYS
         }
 
 
-        public void Merge() // Метод соединяет матрицу фигуры и матрицу карты
+        private void Merge() // Метод соединяет матрицу фигуры и матрицу карты
         {
             for (int i = currentShape.Y; i < currentShape.Y + currentShape.sizeMatrix; i++)
             {
@@ -36,7 +36,7 @@ namespace TUTRYS
             }
         }
 
-        public void ResetArea() // Метод удаляет предыдущее положение фигуры с карты
+        private void ResetArea() // Метод удаляет предыдущее положение фигуры с карты
         {
             for (int i = currentShape.Y; i < currentShape.Y + currentShape.sizeMatrix; i++)
             {
@@ -58,7 +58,7 @@ namespace TUTRYS
         }
 
         // Метод проверяет наличие стенки или другой фигуры снизу от текущей фигуры
-        public int CheckWall()
+        private int CheckWall()
         {
             for (int i = currentShape.Y; i < currentShape.Y + currentShape.sizeMatrix; i++)
             {
@@ -86,7 +86,7 @@ namespace TUTRYS
 
         // Метод проверяет наличие стенки или другой фигуры справа или слева от текущей фигуры в зависимости от значения direction
         // direction = -1 -слева,direction = 1 -справа.
-        public int CheckWall(int direction)
+        private int CheckWall(int direction)
         {
             for (int i = currentShape.Y; i < currentShape.Y + currentShape.sizeMatrix; i++)
             {
@@ -115,7 +115,7 @@ namespace TUTRYS
         }
 
         // Метод изменяет цвет упавшей фигуры
-        public void ChangeColor()
+        private void ChangeColor()
         {
             for (int i = currentShape.Y; i < currentShape.Y + currentShape.sizeMatrix; i++)
             {
@@ -130,7 +130,7 @@ namespace TUTRYS
         }
 
         // Метод удаляет строку если все ячейки заполнены
-        public int CutLine()
+        private int CutLine()
         {
             
             for (int i = 0; i < 16; i++)
@@ -146,7 +146,7 @@ namespace TUTRYS
                 
                 if (count == 8)
                 {
-                  
+                    
                     for (int j = 0; j < 8; j++)
                     {                 
                         map[i, j] = 0;
@@ -162,7 +162,7 @@ namespace TUTRYS
         }
 
         // Метод перемещает верхние окрашенные ячеки вниз после удаления заполненой линии
-        public void FallFigures(int row)
+        private void FallFigures(int row)
         {
             for (int i = row; i >= 1 ; i=i-1)
             {
@@ -176,7 +176,7 @@ namespace TUTRYS
                 }
             }
         }
-        public int GameOverCheck() // Метод проверяет верхние строки на наличие фигур, если есть возвращает 1
+        private int GameOverCheck() // Метод проверяет верхние строки на наличие фигур, если есть возвращает 1
         {
             //for (int i = 0; i < 2; i++)
                            
