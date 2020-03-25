@@ -11,25 +11,25 @@ namespace TUTRYS
         public static Shape GetRandomFigure()
         {
             Random rnd = new Random();
-            int FigureType = rnd.Next(0, 3);
+            int FigureType = rnd.Next(0, 4);
             Shape currentShape = null;
 
             switch (FigureType)
             {
                 case 0:
-                    currentShape = new ShapeLine(3, 0);
+                    currentShape = new ShapeLine(2, 0);
                     break;
 
                 case 1:
-                    currentShape = new ShapeZigZag(3, 0);
+                    currentShape = new ShapeZigZag(2, 0);
                     break;
 
                 case 2:
-                    currentShape = new ShapeRectangle(3, 0);
+                    currentShape = new ShapeRectangle(2, 0);
                     break;
 
                 case 3:
-                    currentShape = new ShapeLtype(3, 0);
+                    currentShape = new ShapeLtype(2, 0);
                     break;
 
             }

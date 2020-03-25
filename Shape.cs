@@ -9,146 +9,114 @@ namespace TUTRYS
    public abstract class Shape
     {
 
-
         public int X { get; set; }
         public int Y { get; set; }
-        public int[,] matrix;
-        private int copy;
+        public int[,] Matrix { get; set; }
         public  int sizeMatrix=3;
-
 
 
         public Shape(int _x, int _y)
         {
             X = _x;
-            Y = _y;
-           
+            Y = _y;        
         }
-                 
-                  
+                               
         public void MoveDown()  // Изменение координаты у при движении вниз
-        {
-           
-             Y++;
-            
+        {          
+             Y++;          
         }
 
         public void MoveRight() // Изменение координаты x при движении вправо
-        {                    
-                   
-             X++; 
-            
+        {                                    
+             X++;            
         }
 
         public void MoveLeft()  // Изменение координаты x при движении влево
-        {
-                      
-             X--;                  
-                    
+        {                   
+             X--;                                  
         }
 
-
         public void TurnArround() // Переворачивание фигуры
-        {
-            if (X>=0 && X<= 8 - sizeMatrix && Y<= 15 - sizeMatrix)
-            {
+        {                    
                 for (int i = 0; i < 3; i++)
                 {
                     for (int j = 0; j < i; j++)
                     {
-                        copy = matrix[i, j];
-                        matrix[i, j] = matrix[j, i];
-                        matrix[j, i] = copy;
+                        int copy = Matrix[i, j];
+                        Matrix[i, j] = Matrix[j, i];
+                        Matrix[j, i] = copy;
                     }
-                }
-            }
-            
+                }               
         }
 
     }
 
     public class ShapeLine:Shape
-
-    {
-     
+    { 
         public ShapeLine(int _x, int _y)  // Создание фигуры в виде Линии
             : base(_x, _y)
         {
             X = _x;
             Y = _y;
-            matrix = new int[3, 3]
+            Matrix = new int[3, 3]
             {
                 { 0, 0, 0 },
                 { 1, 1, 1 },
                 { 0, 0, 0 },
             };
-
-
         }
-
     }
 
 
     public class ShapeZigZag : Shape
 
-    {
-    
+    {    
         public ShapeZigZag(int _x, int _y) // Создание фигуры в виде Зигзага
             : base(_x, _y)
         {
             X = _x;
             Y = _y;
-            matrix = new int[3, 3]
+            Matrix = new int[3, 3]
             {
                 { 0, 1, 0 },
                 { 0, 1, 1 },
                 { 0, 0, 1 },
             };
-
-
         }
-
     }
     public class ShapeRectangle : Shape  // Создание фигуры в виде Квадрата
 
-    {
-     
+    {   
         public ShapeRectangle(int _x, int _y)
             : base(_x, _y)
         {
             X = _x;
             Y = _y;
-            matrix = new int[3, 3]
+            Matrix = new int[3, 3]
             {
                 { 0, 1, 1 },
                 { 0, 1, 1 },
                 { 0, 0, 0 },
             };
-
-
         }
-
     }
 
 
     public class ShapeLtype : Shape    // Создание фигуры в виде буквы L
 
     {
-    
         public ShapeLtype(int _x, int _y)
             : base(_x, _y)
         {
             X = _x;
             Y = _y;
-            matrix = new int[3, 3]
+            Matrix = new int[3, 3]
             {
                 { 0, 1, 0 },
                 { 0, 1, 0 },
                 { 0, 1, 1 },
             };
-
         }
-
     }
 
 

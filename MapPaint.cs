@@ -6,17 +6,18 @@ using System.Threading.Tasks;
 using System.Drawing;
 namespace TUTRYS
 {
-    class MapFunction
+    class MapPaint
     {
         private int size;
         private int[,] map;
 
-        public MapFunction(int _size,int [,] _map)
+       
+
+        public MapPaint(int _size,int [,] _map)
         { 
             size = _size; 
             map = _map;  
         }
-
 
         public void DrawGrid(Graphics e)
         {
@@ -34,9 +35,8 @@ namespace TUTRYS
             }
         }
 
-
-
         public void DrawMap(Graphics e)
+
         {
             for (int i = 0; i < 16; i++)
             {
@@ -52,9 +52,9 @@ namespace TUTRYS
                     }
                 }
             }
+
+
         }
-
-
 
     }
 }
